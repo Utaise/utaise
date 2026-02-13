@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>ทำเล่น</title>
+
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    font-family: Arial, sans-serif;
+    cursor: pointer;
+  }
+
+  #text {
+    font-size: 32px;
+    color: rgb(0, 0, 0);
+    border-right: 3px solid rgb(113, 24, 146);
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  .blink {
+    animation: blinkCursor 0.8s infinite;
+  }
+
+  @keyframes blinkCursor {
+    0%, 50%, 100% { border-color: rgb(229, 22, 22); }
+    25%, 75% { border-color: transparent; }
+  }
+</style>
+</head>
+
+<body onclick="typeText()">
+
+<div id="text">=v=</div>
+
+<script>
+  const message = "ขอเงินแหน่";
+  let index = 0;
+  let typing = false;
+
+  function typeText() {
+    if (typing) return; // กันกดซ้ำตอนกำลังพิมพ์
+    typing = true;
+
+    const text = document.getElementById("text");
+    text.innerText = "";
+    text.classList.add("blink");
+    index = 0;
+
+    const interval = setInterval(() => {
+      text.innerText += message[index];
+      index++;
+
+      if (index === message.length) {
+        clearInterval(interval);
+        typing = false;
+      }
+    }, 100);
+  }
+</script>
+
+</body>
+</html>
